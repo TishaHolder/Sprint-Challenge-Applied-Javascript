@@ -18,8 +18,6 @@
   </div>
 */
 
-console.log("carousel is here");
-
 let carouselContainer = document.querySelector(".carousel-container");
 carouselContainer.appendChild(carouselCreator());
 
@@ -58,14 +56,20 @@ function carouselCreator() {
   //add the first item in the array to the carousel
   divCarousel.appendChild(current);
 
-  divRightButton.addEventListener('click', function(ev) {
+  //when right button is clicked
+  divRightButton.addEventListener('click', function(ev) {  
+    
+    //increase the counter by 1
     counter++;
 
+    //if counter is greater than the number of items in the array, reset it to 0
     if (counter > arrayLength) {
       counter = 0;
     }
 
-    divCarousel.appendChild(items[counter]);    
+    //add the current image to the carousel
+    divCarousel.appendChild(items[counter]);  
+    
 
   });
   
@@ -73,11 +77,12 @@ function carouselCreator() {
   divLeftButton.addEventListener('click', function(ev) {
     counter--;
 
-    //if counter is less than the first index in the array, change the pointer to the last picture in the array
+    //if counter is less than the first index in the array, change the pointer/cursor to the last picture in the array
     if (counter < 0) {
-       counter = arrayLength;
+       counter = arrayLength-1;
     }
 
+    //add the current image to the carousel
     divCarousel.appendChild(items[counter]);
 
   });  
