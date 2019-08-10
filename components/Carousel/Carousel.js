@@ -18,7 +18,7 @@
   </div>
 */
 
-/*console.log("carousel is here");
+console.log("carousel is here");
 
 let carouselContainer = document.querySelector(".carousel-container");
 carouselContainer.appendChild(carouselCreator());
@@ -31,6 +31,7 @@ function carouselCreator() {
   const divLeftButton = document.createElement("div");
   divLeftButton.classList.add("left-button");
   divLeftButton.textContent = "<";
+  divCarousel.appendChild(divLeftButton);
 
   const mountainsImage = document.createElement("img");
   mountainsImage.src = "./assets/carousel/mountains.jpeg";
@@ -46,49 +47,46 @@ function carouselCreator() {
 
   const divRightButton = document.createElement("div");
   divRightButton.classList.add("right-button");
-  divLeftButton.textContent = ">";
+  divRightButton.textContent = ">";
+  divCarousel.appendChild(divRightButton); 
 
-  divCarousel.appendChild(divLeftButton);
-  divCarousel.appendChild(mountainsImage);
-  divCarousel.appendChild(computerImage);
-  divCarousel.appendChild(treesImage);
-  divCarousel.appendChild(turntableImage);
-  divCarousel.appendChild(divRightButton);  
+  let items = [mountainsImage, computerImage, treesImage, turntableImage];  
+  let counter = 0;
+  let arrayLength = items.length;
+  let current = items[counter];
 
-  function navigate(direction) {
+  //add the first item in the array to the carousel
+  divCarousel.appendChild(current);
 
-    var counter = 0;
-   
-    var items = [mountainsImage, computerImage, treesImage, turntableImage];    
+  divRightButton.addEventListener('click', function(ev) {
+    counter++;
 
-    var amount = items.length;  
-    var current = items[0];
-
-    
-    counter = counter + direction;
-    if (direction === -1 && 
-        counter < 0) { 
-      counter = amount - 1; 
-    }
-    if (direction === 1 && 
-        !items[counter]) { 
+    if (counter > arrayLength) {
       counter = 0;
     }
-    current = items[counter];
-    
-  }
 
+    divCarousel.appendChild(items[counter]);    
+
+  });
   
-  divRightButton.addEventListener('click', function(ev) {
-    navigate(1);
-  });
+  //add event listener to the left button
   divLeftButton.addEventListener('click', function(ev) {
-    navigate(-1);
-  });
-  navigate(0);
+    counter--;
+
+    //if counter is less than the first index in the array, change the pointer to the last picture in the array
+    if (counter < 0) {
+       counter = arrayLength;
+    }
+
+    divCarousel.appendChild(items[counter]);
+
+  });  
 
   return divCarousel;
 
-}*/
+}
+
+
+
 
 
